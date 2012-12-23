@@ -1,8 +1,8 @@
---- 
-:title: My Gamebox Game!
+---
+:title: Missle Commando
 :sound: true
 :auto_quit: KbEscape
 :fullscreen: false
-:screen_resolution: 
+:screen_resolution:
 - 1024
 - 800

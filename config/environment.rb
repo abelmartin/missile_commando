@@ -20,4 +20,6 @@ GAMEBOX_MUSIC_PATH =  GAMEBOX_PATH + "data/music/"
 GAMEBOX_GFX_PATH =  GAMEBOX_PATH + "data/graphics/"
 GAMEBOX_FONTS_PATH =  GAMEBOX_PATH + "data/fonts/"
 
-GAME_NAME = "UntitledGame"
+GAME_NAME = "MissleCommando"
+SCREEN_HEIGHT = 800
+SCREEN_WIDTH = 1024
