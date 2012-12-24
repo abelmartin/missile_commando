@@ -3,7 +3,7 @@ class TurretView < ActorView
     target.draw_box(
       @actor.x,
       @actor.y,
-      @actor.x + (target.screen.width/DENOMINATOR),
+      @actor.x + actor.turret_width,
       @actor.y + 50,
       [20,20,255,255], z
     )
@@ -11,7 +11,9 @@ class TurretView < ActorView
 end
 
 class Turret < Actor
-  def setup
+  attr_reader :turret_width
 
+  def setup
+    @turret_width = (screen.width/DENOMINATOR)
   end
 end

@@ -20,5 +20,5 @@ GAMEBOX_MUSIC_PATH =  GAMEBOX_PATH + "data/music/"
 GAMEBOX_GFX_PATH =  GAMEBOX_PATH + "data/graphics/"
 GAMEBOX_FONTS_PATH =  GAMEBOX_PATH + "data/fonts/"
 
-GAME_NAME = "MissleCommando"
+GAME_NAME = "MissileCommando"
 DENOMINATOR = 7
