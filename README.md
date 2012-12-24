@@ -10,6 +10,7 @@ Images were taken from some of the following Lost Garden projects:
 
 * http://www.lostgarden.com/2007/04/free-game-graphics-tyrian-ships-and.html
 * http://www.lostgarden.com/2005/03/game-post-mortem-hard-vacuum.html
+* http://www.lostgarden.com/2006/02/250-free-handdrawn-textures.html
 
 ...and IronStar projects:
 
