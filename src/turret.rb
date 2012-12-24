@@ -1,6 +1,12 @@
 class TurretView < ActorView
   def draw(target, x_off, y_off, z)
-    target.draw_box @actor.x, @actor.y, 90, 90, [20,20,255,255], 1
+    target.draw_box(
+      @actor.x,
+      @actor.y,
+      @actor.x + (target.screen.width/DENOMINATOR),
+      @actor.y + 50,
+      [20,20,255,255], z
+    )
   end
 end
 

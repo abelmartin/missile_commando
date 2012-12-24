@@ -1,20 +1,18 @@
 class ShieldView < ActorView
-  #require 'debugger'
-
   def draw(target, x_off, y_off, z)
     target.draw_box(
       5,
-      SCREEN_HEIGHT - 150,
-      SCREEN_WIDTH - 5,
-      SCREEN_HEIGHT - 100,
+      target.screen.height - 150,
+      target.screen.width - 5,
+      target.screen.height - 100,
       [255,255,255,255], z
     )
 
     font = @stage.resource_manager.load_font 'Asimov.ttf', 50
-    font.draw( 
+    font.draw(
       'Shield 100%',
-      (SCREEN_WIDTH/2) - 120,
-      SCREEN_HEIGHT - 150,
+      (target.screen.width/2) - 120,
+      target.screen.height - 150,
       z,
     )
   end
