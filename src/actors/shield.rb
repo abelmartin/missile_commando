@@ -26,7 +26,6 @@ class Shield < Actor
   attr_accessor :color, :dimensions
 
   def setup
-    #debugger
     @color = [255, 255, 255, 255]
     @dimensions = {
       x1: 5,
