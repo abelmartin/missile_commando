@@ -27,6 +27,14 @@ class Alien < Actor
     @health = 100
   end
 
+  def shoot
+    bullet = spawn :bullet
+    bullet.warp vec2(self.x,self.y)+vec2(self.body.rot.x,self.body.rot.y).normalize*30
+    bullet.body.a += self.body.a
+    bullet.dir = vec2(self.body.rot.x,self.body.rot.y)
+    play_sound :laser
+  end
+
   def update(time)
     #stage.score + time
     @time_pool += time
