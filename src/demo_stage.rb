@@ -1,13 +1,11 @@
 class DemoStage < Stage
-  require 'debugger'
-
   attr_reader :score, :shield, :shield_status, :status_label
 
   def setup
     super
 
     @score = spawn :score, x: 10, y: 10
-    #@cursor = spawn :cursor
+    @cursor = spawn :cursor, z: 10
     @shield = spawn :shield, z: 1
     @shield_status = spawn :shield_status, z: 3
     @status_label = spawn :status_label, x: (width - 100), y: 10, text: "TEST"
@@ -55,9 +53,13 @@ class DemoStage < Stage
     #debugger if @ms_click
     @ms_click = false if @ms_click
 
-    if @bullet && @shield && collide?( @bullet, @shield )
-      @status_label.text = "collide"
-    end
+    #if @bullet && @shield && collide?( @bullet, @shield )
+      #@status_label.text = "collide"
+    #end
+
+    #Move the cursor crosshair with mouse position
+    @cursor.x = input_manager.window.mouse_x.to_i
+    @cursor.y = input_manager.window.mouse_y.to_i
   end
 end
 
