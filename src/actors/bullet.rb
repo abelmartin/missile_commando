@@ -1,20 +1,19 @@
 class BulletView < ActorView
   def draw(target, x_off, y_off, z)
     target.draw_circle_filled(
-      actor.opts[:x] + x_off,
-      actor.opts[:y] + y_off,
+      actor.x + x_off,
+      actor.y + y_off,
       actor.bullet_size,
       actor.color,
       z,
     )
+
+    stage.status_label.text = "Mouse { X:#{actor.x} Y:#{actor.y} }"
+
   end
 end
 
 class Bullet < Actor
-  #has_behaviors :updatable, :physical => {:shape => :circle, 
-    #:mass => 10,
-    #:radius => 3}
-  #has_behaviors :animated, :updatable
   has_behaviors :updatable, collidable: {
     shape: :polygon, points: [
       [ 5, 650 ],
