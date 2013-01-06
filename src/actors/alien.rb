@@ -36,7 +36,7 @@ class Alien < Actor
   end
 
   def update(time)
-    #stage.score + time
+    # Add a little pulsing to the alien
     @time_pool += time
     case @color[1]
     when 245..255

@@ -8,7 +8,7 @@ class DemoStage < Stage
     @cursor = spawn :cursor, z: 10
     @shield = spawn :shield, z: 1
     @shield_status = spawn :shield_status, z: 3
-    @status_label = spawn :status_label, x: (width - 100), y: 10, text: "TEST"
+    @status_label = spawn :status_label, x: (width - 100), y: 0, text: "TEST"
 
     screen_segment = width / DENOMINATOR
     turret_height = height - 80
@@ -18,15 +18,6 @@ class DemoStage < Stage
     @turret1 = spawn :turret, x: screen_segment*1, y: turret_height
     @turret2 = spawn :turret, x: screen_segment*3, y: turret_height
     @turret3 = spawn :turret, x: screen_segment*5, y: turret_height
-
-    @ms_on = false
-
-    input_manager.reg :down, MsLeft do
-      @bullet ||= spawn :bullet
-      @bullet.x = input_manager.window.mouse_x.to_i
-      @bullet.y = input_manager.window.mouse_y.to_i
-      @ms_click = true
-    end
   end
 
   def draw(target)
@@ -47,19 +38,6 @@ class DemoStage < Stage
 
   def aliens
     [@alien1]
-  end
-
-  def update(time)
-    #debugger if @ms_click
-    @ms_click = false if @ms_click
-
-    #if @bullet && @shield && collide?( @bullet, @shield )
-      #@status_label.text = "collide"
-    #end
-
-    #Move the cursor crosshair with mouse position
-    @cursor.x = input_manager.window.mouse_x.to_i
-    @cursor.y = input_manager.window.mouse_y.to_i
   end
 end
 

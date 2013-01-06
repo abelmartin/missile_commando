@@ -8,8 +8,6 @@ class BulletView < ActorView
       z,
     )
 
-    stage.status_label.text = "Mouse { X:#{actor.x} Y:#{actor.y} }"
-
   end
 end
 
@@ -35,7 +33,6 @@ class Bullet < Actor
   end
 
   def update(time)
-    #physical.body.apply_impulse(@dir*time*@speed, ZERO_VEC_2) if physical.body.v.length < 400
     #super time
     @time += time
     if @time % 500 == 0
@@ -47,6 +44,10 @@ class Bullet < Actor
 
       @time = 0
     end
+
+    #if stage.collide?( self, stage.shield )
+      #stage.status_label.text = "collide"
+    #end
   end
 
 end

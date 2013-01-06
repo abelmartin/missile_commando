@@ -21,3 +21,6 @@ Images were taken from some of the following Lost Garden projects:
 * http://www.flickr.com/photos/zooboing/sets/72157622892051396/
 
 Audio was taken from the example projects in the gamebox project and also created using Bfxr ([website](http://www.bfxr.net/), [website repo](https://github.com/increpare/bfxr), [adobe air repo](https://github.com/increpare/bfxr-air)).
+
+Plus a font named after me...which is AWESOME!
+* http://www.google.com/webfonts/specimen/Abel

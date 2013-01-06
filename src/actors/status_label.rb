@@ -20,7 +20,7 @@ class StatusLabel < Actor
     reset_strength
     @text = opts[:text]
     @color = [255,255,255,255]
-    @font = @stage.resource_manager.load_font 'Asimov.ttf', 50
+    @font = @stage.resource_manager.load_font 'Abel-Regular.ttf', 40
 
     input_manager.reg :down, KbSpace do
       @text = "SPACE BAR HIT"
