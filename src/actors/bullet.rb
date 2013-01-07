@@ -32,6 +32,10 @@ class Bullet < Actor
     @bullet_size = 5
   end
 
+  def lowest_point
+    y + bullet_size
+  end
+
   def update(time)
     #super time
     @time += time
@@ -45,7 +49,7 @@ class Bullet < Actor
       @time = 0
     end
 
-    #if stage.collide?( self, stage.shield )
+    #if stage.shield.hit?(self)
       #stage.status_label.text = "collide"
     #end
   end

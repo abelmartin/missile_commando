@@ -11,19 +11,10 @@ class ShieldView < ActorView
 end
 
 class Shield < Actor
-  #has_behaviors :actor_hit, :updatable
-  #has_behaviors :collidable, :updatable
+  #has_behaviors :actor_hit
 
-  has_behaviors collidable: {
-    shape: :polygon, points: [
-      [ 5, 650 ],
-      [ 5, 700 ],
-      [ 1019, 650 ],
-      [ 1019, 700 ],
-    ]
-  }
-
-  attr_accessor :color, :dimensions
+  attr_reader :dimensions
+  attr_accessor :color
 
   def setup
     @color = [255, 255, 255, 255]
@@ -33,6 +24,10 @@ class Shield < Actor
       x2: screen.width - 5,
       y2: screen.height - 100,
     }
+  end
+
+  def hit?(bullet)
+    bullet.lowest_point > dimensions[:y1] + 5
   end
 
 end

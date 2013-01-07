@@ -13,8 +13,8 @@ class StatusLabelView < ActorView
 end
 
 class StatusLabel < Actor
-  attr_reader :strength
-  attr_accessor :text, :font, :color
+  attr_reader :strength, :font
+  attr_accessor :text, :color
 
   def setup
     reset_strength

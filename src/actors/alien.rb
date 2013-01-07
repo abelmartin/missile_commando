@@ -4,7 +4,7 @@ class AlienView < ActorView
     #target.draw_circle(
       actor.opts[:x],
       actor.opts[:y],
-      50,
+      actor.radius,
       actor.color,
       z,
     )
@@ -12,14 +12,16 @@ class AlienView < ActorView
 end
 
 class Alien < Actor
-  attr_accessor :health, :color
+  attr_reader :health, :color, :radius
 
   has_behaviors :updatable
+  #has_behaviors :actor_hit
 
   def setup
     @color = [0, 255, 0, 255]
     @time_pool = 0
     @catalyst = 1
+    @radius = 40
     reset_health
   end
 
@@ -33,6 +35,10 @@ class Alien < Actor
     bullet.body.a += self.body.a
     bullet.dir = vec2(self.body.rot.x,self.body.rot.y)
     play_sound :laser
+  end
+
+  def hit?(bullet)
+    bullet.x^2 + bullet.y^2 < radius^2
   end
 
   def update(time)
