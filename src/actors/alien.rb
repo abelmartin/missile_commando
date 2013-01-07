@@ -2,8 +2,8 @@ class AlienView < ActorView
   def draw(target, x_off, y_off, z)
     target.draw_circle_filled(
     #target.draw_circle(
-      actor.opts[:x],
-      actor.opts[:y],
+      actor.x,
+      actor.y,
       actor.radius,
       actor.color,
       z,
@@ -22,6 +22,7 @@ class Alien < Actor
     @time_pool = 0
     @catalyst = 1
     @radius = 40
+    @bullets = []
     reset_health
   end
 
@@ -30,8 +31,9 @@ class Alien < Actor
   end
 
   def shoot
-    bullet = spawn :bullet
-    play_sound :laser
+    # bullet's are fired from actor's xy
+    @bullets.push( spawn :bullet, x:x, y:y )
+    stage.sound_manager.play_sound :laser
   end
 
   def hit?(bullet)
@@ -40,9 +42,29 @@ class Alien < Actor
 
   def update(time)
     update_color
+    movement
+
+    @time_pool += time
+    shoot if (10...25).include?(@time_pool % 5000)
   end
 
   private
+
+  def movement
+    rate = 10
+    @update_value ||= rate
+
+    case x
+    when (screen.width - radius)..screen.width
+      @update_value = -1*rate
+      self.y += rate
+    when 0..radius
+      @update_value = rate
+      self.y += rate
+    end
+
+    self.x += @update_value
+  end
 
   def update_color
     # Add a little pulsing to the alien

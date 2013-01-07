@@ -12,14 +12,7 @@ class BulletView < ActorView
 end
 
 class Bullet < Actor
-  has_behaviors :updatable, collidable: {
-    shape: :polygon, points: [
-      [ 5, 650 ],
-      [ 5, 700 ],
-      [ 1019, 650 ],
-      [ 1019, 700 ],
-    ]
-  }
+  has_behaviors :updatable
 
   attr_accessor :dir, :color
   attr_reader :speed, :power, :bullet_size
@@ -29,7 +22,8 @@ class Bullet < Actor
     @power = opts[:power] || 10
     @color = [255,0,0,255]
     @time = 0
-    @bullet_size = 5
+    @bullet_size = opts[:bullet_size] || 5
+    #@target = opts[:target]
   end
 
   def lowest_point
@@ -38,16 +32,16 @@ class Bullet < Actor
 
   def update(time)
     #super time
-    @time += time
-    if @time % 500 == 0
-      if visible?
-        self.show
-      else
-        self.hide
-      end
+    #@time += time
+    #if @time % 3000 == 0
+      #if visible?
+        #self.show
+      #else
+        #self.hide
+      #end
 
-      @time = 0
-    end
+      #@time = 0
+    #end
 
     #if stage.shield.hit?(self)
       #stage.status_label.text = "collide"

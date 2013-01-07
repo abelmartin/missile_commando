@@ -10,13 +10,14 @@ class TurretView < ActorView
     )
 
     # Small box on top
-    #target.draw_box(
-      #actor.x,
-      #actor.y,
-      #actor.x + actor.default_width,
-      #actor.y + actor.default_height,
-      #[255, 153, 0, 255], z
-    #)
+    reduction = 50
+    target.draw_box(
+      actor.x + reduction,
+      actor.y - reduction + 20,
+      actor.x + actor.default_width - reduction,
+      actor.y + actor.default_height - reduction,
+      [255, 153, 0, 255], z
+    )
   end
 end
 
