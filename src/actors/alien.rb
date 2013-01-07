@@ -31,9 +31,6 @@ class Alien < Actor
 
   def shoot
     bullet = spawn :bullet
-    bullet.warp vec2(self.x,self.y)+vec2(self.body.rot.x,self.body.rot.y).normalize*30
-    bullet.body.a += self.body.a
-    bullet.dir = vec2(self.body.rot.x,self.body.rot.y)
     play_sound :laser
   end
 
@@ -42,8 +39,13 @@ class Alien < Actor
   end
 
   def update(time)
+    update_color
+  end
+
+  private
+
+  def update_color
     # Add a little pulsing to the alien
-    @time_pool += time
     case @color[1]
     when 245..255
       @catalyst = 5
@@ -52,4 +54,5 @@ class Alien < Actor
     end
     @color[1] -= @catalyst
   end
+
 end

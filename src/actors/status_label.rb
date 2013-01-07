@@ -13,14 +13,14 @@ class StatusLabelView < ActorView
 end
 
 class StatusLabel < Actor
-  attr_reader :strength, :font
-  attr_accessor :text, :color
+  attr_reader :strength
+  attr_accessor :text, :font, :color
 
   def setup
     reset_strength
     @text = opts[:text]
     @color = [255,255,255,255]
-    @font = @stage.resource_manager.load_font 'Abel-Regular.ttf', 40
+    @font = @stage.resource_manager.load_font 'Abel-Regular.ttf', 50
 
     input_manager.reg :down, KbSpace do
       @text = "SPACE BAR HIT"

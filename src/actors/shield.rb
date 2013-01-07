@@ -17,12 +17,14 @@ class Shield < Actor
   attr_accessor :color
 
   def setup
+    @shield_status = spawn :shield_status, z: 3, x: screen.width
+
     @color = [255, 255, 255, 255]
     @dimensions = {
       x1: 5,
-      y1: screen.height - 150,
+      y1: screen.height - 175,
       x2: screen.width - 5,
-      y2: screen.height - 100,
+      y2: screen.height - 125,
     }
   end
 

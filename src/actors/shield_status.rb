@@ -4,7 +4,7 @@ class ShieldStatusView < ActorView
     font.draw(
       "Shield #{actor.strength}%",
       (target.screen.width/2) - 120,
-      target.screen.height - 150,
+      target.screen.height - 175,
       z,
       1,
       1,
