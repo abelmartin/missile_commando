@@ -26,6 +26,9 @@ class Shield < Actor
       x2: screen.width - 5,
       y2: screen.height - 125,
     }
+
+    self.x = @dimensions[:x1]
+    self.y = @dimensions[:y1]
   end
 
   def hit?(bullet)

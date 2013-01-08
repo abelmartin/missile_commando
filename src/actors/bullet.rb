@@ -27,8 +27,8 @@ class Bullet < Actor
     @target = opts[:target] || {x: screen.width, y: 0}
 
     #Set the starting point against the origin
-    self.x = @origin{:x}
-    self.y = @origin{:y}
+    self.x = @origin[ :x ]
+    self.y = @origin[ :y ]
   end
 
   def lowest_point
@@ -36,12 +36,14 @@ class Bullet < Actor
   end
 
   def update(time)
-    @time ||= 0
+    @time_pool ||= 0
 
-    @time += time
+    #debugger
+    @time_pool += time
+
     if (0..25).include?(@time_pool % @speed)
-      self.x += origin{:x} - target{:x}
-      self.y += origin{:y} - target{:y}
+      self.x += origin[ :x ] - target[ :x ]
+      self.y += origin[ :y ] - target[ :y ]
     end
 
     #if stage.shield.hit?(self)

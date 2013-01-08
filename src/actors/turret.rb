@@ -33,7 +33,15 @@ class Turret < Actor
     self.y = screen.height - 80
 
     @ms_click = false
-    input_manager.reg :down, MsLeft { shoot }
+    stage.input_manager.reg :down, MsLeft do
+      shoot
+    end
+  end
+
+  def update(time)
+    #debug on click and reset
+    #debugger if @ms_click
+    #@ms_click = false if @ms_click
   end
 
   private
@@ -59,11 +67,5 @@ class Turret < Actor
     else
       stage.status_label.text = "Too many shots! #{@shots.length}"
     end
-  end
-
-  def update(time)
-    #debug on click and reset
-    #debugger if @ms_click
-    #@ms_click = false if @ms_click
   end
 end

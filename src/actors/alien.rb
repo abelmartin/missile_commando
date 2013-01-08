@@ -31,6 +31,17 @@ class Alien < Actor
 
   def shoot
     # bullet's are fired from actor's xy
+    origin = {
+      x: x,
+      y: y,
+    }
+
+    # alien target is somewhere on the shield
+    target = {
+      x: Random.rand(screen.width),
+      y: stage.shield.y + 5,
+    }
+
     @shots.push(
       spawn :bullet, color: @color, origin: origin, target: target
     )
