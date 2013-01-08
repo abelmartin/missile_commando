@@ -1,8 +1,8 @@
 class BulletView < ActorView
   def draw(target, x_off, y_off, z)
     target.draw_circle_filled(
-      actor.x + x_off,
-      actor.y + y_off,
+      actor.x,
+      actor.y,
       actor.bullet_size,
       actor.color,
       z,
@@ -41,9 +41,24 @@ class Bullet < Actor
     #debugger
     @time_pool += time
 
-    if (0..25).include?(@time_pool % @speed)
-      self.x += origin[ :x ] - target[ :x ]
-      self.y += origin[ :y ] - target[ :y ]
+    if (0..35).include?(@time_pool % @speed)
+      delta_x = (@origin[ :x ] - @target[ :x ]).to_f
+      delta_y = (@origin[ :y ] - @target[ :y ]).to_f
+      slope =  delta_x / delta_y
+      #debugger
+      #stage.status_label.text = slope
+
+      #Once we have the slope, we can figure out movement.
+      #when adding the simple number make sure to keep the pos/neg of the equation.
+      #in a whole number slope (ex:4/1), do the following
+      if slope >= 1
+        self.x += (slope * 10).to_i
+        self.y += (slope >=0) ? 10 : -10
+      else
+        #in a fraction slope (ex:1/4), do the following
+        self.x += (slope >=0) ? 1 : -1
+        self.y += (slope * 10).to_i
+      end
     end
 
     #if stage.shield.hit?(self)

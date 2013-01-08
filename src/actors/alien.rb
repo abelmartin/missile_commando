@@ -58,8 +58,8 @@ class Alien < Actor
     update_color
     movement
 
-    @time_pool += time
-    shoot if (10...25).include?(@time_pool % 5000)
+    #@time_pool += time
+    #shoot if (10...25).include?(@time_pool % 2000)
   end
 
   private

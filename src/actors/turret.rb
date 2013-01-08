@@ -50,8 +50,8 @@ class Turret < Actor
     #@ms_click = true
     if @shots.length <= 3
       origin = {
-        x: actor.x + 60,
-        y: actor.y + 60,
+        x: x + 60,
+        y: y + 60,
       }
 
       target = {
