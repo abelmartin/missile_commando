@@ -37,11 +37,12 @@ class DemoStage < Stage
   def update(time)
     super time
 
-    @time_pool ||= 0
-    @time_pool += time
-    if (10..35).include?(@time_pool % 10000)
-      aliens.push( spawn :alien,  x: width / 2, y: 50 )
-    end
+    #@time_pool ||= 0
+    #@time_pool += time
+
+    #if (10..35).include?(@time_pool % 10000)
+      #aliens.push( spawn :alien,  x: width / 2, y: 50 )
+    #end
 
     aliens.push( spawn :alien,  x: width / 2, y: 50 ) if aliens.empty?
   end

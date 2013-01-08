@@ -18,11 +18,10 @@ class Alien < Actor
   #has_behaviors :actor_hit
 
   def setup
+    @shots = []
     @color = [0, 255, 0, 255]
-    @time_pool = 0
     @catalyst = 1
     @radius = 40
-    @bullets = []
     reset_health
   end
 
@@ -32,7 +31,9 @@ class Alien < Actor
 
   def shoot
     # bullet's are fired from actor's xy
-    @bullets.push( spawn :bullet, x:x, y:y )
+    @shots.push(
+      spawn :bullet, color: @color, origin: origin, target: target
+    )
     stage.sound_manager.play_sound :laser
   end
 
@@ -41,6 +42,8 @@ class Alien < Actor
   end
 
   def update(time)
+    @time_pool ||= 0
+
     update_color
     movement
 

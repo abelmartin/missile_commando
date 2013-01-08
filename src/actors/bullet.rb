@@ -7,23 +7,28 @@ class BulletView < ActorView
       actor.color,
       z,
     )
-
   end
 end
 
 class Bullet < Actor
   has_behaviors :updatable
 
-  attr_accessor :dir, :color
-  attr_reader :speed, :power, :bullet_size
+  attr_reader :speed, :power, :color, :bullet_size, :origin, :target
 
   def setup
-    @speed = opts[:speed] || 400
+    @speed = opts[:speed] || 1000
     @power = opts[:power] || 10
-    @color = [255,0,0,255]
-    @time = 0
+    @color = opts[:color] || [255,0,0,255]
     @bullet_size = opts[:bullet_size] || 5
-    #@target = opts[:target]
+
+    #If you don't give a origin or target,
+    #the bullet will just race across the top of the screen
+    @origin = opts[:origin] || {x: 0, y: 0}
+    @target = opts[:target] || {x: screen.width, y: 0}
+
+    #Set the starting point against the origin
+    self.x = @origin{:x}
+    self.y = @origin{:y}
   end
 
   def lowest_point
@@ -31,17 +36,13 @@ class Bullet < Actor
   end
 
   def update(time)
-    #super time
-    #@time += time
-    #if @time % 3000 == 0
-      #if visible?
-        #self.show
-      #else
-        #self.hide
-      #end
+    @time ||= 0
 
-      #@time = 0
-    #end
+    @time += time
+    if (0..25).include?(@time_pool % @speed)
+      self.x += origin{:x} - target{:x}
+      self.y += origin{:y} - target{:y}
+    end
 
     #if stage.shield.hit?(self)
       #stage.status_label.text = "collide"

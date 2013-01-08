@@ -6,7 +6,7 @@ class TurretView < ActorView
       actor.y,
       actor.x + actor.default_width,
       actor.y + actor.default_height,
-      [255, 153, 0, 255], z
+      actor.color, z
     )
 
     # Small box on top
@@ -16,17 +16,54 @@ class TurretView < ActorView
       actor.y - reduction + 20,
       actor.x + actor.default_width - reduction,
       actor.y + actor.default_height - reduction,
-      [255, 153, 0, 255], z
+      actor.color, z
     )
   end
 end
 
 class Turret < Actor
-  attr_reader :default_width, :default_height
+  has_behaviors :updatable
+  attr_reader :default_width, :default_height, :color
 
   def setup
+    @shots = []
     @default_width = (screen.width/DENOMINATOR)
     @default_height = 50
+    @color = [255, 153, 0, 255]
     self.y = screen.height - 80
+
+    @ms_click = false
+    input_manager.reg :down, MsLeft { shoot }
+  end
+
+  private
+
+  def shoot
+    #@ms_click = true
+    if @shots.length <= 3
+      origin = {
+        x: actor.x + 60,
+        y: actor.y + 60,
+      }
+
+      target = {
+        x: input_manager.window.mouse_x.to_i,
+        y: input_manager.window.mouse_y.to_i,
+      }
+
+      bullet = spawn :bullet, color: @color, origin: origin, target: target
+
+      @shots.push bullet
+
+      stage.status_label.text = "Target { X:#{bullet.x} Y:#{bullet.y} }"
+    else
+      stage.status_label.text = "Too many shots! #{@shots.length}"
+    end
+  end
+
+  def update(time)
+    #debug on click and reset
+    #debugger if @ms_click
+    #@ms_click = false if @ms_click
   end
 end

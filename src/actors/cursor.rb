@@ -33,23 +33,9 @@ class Cursor < Actor
   def setup
     @color = [255,0,0,255]
     @cursor_size = 15
-
-    @ms_click = false
-
-    input_manager.reg :down, MsLeft do
-      @bullet ||= spawn :bullet
-      @bullet.x = input_manager.window.mouse_x.to_i
-      @bullet.y = input_manager.window.mouse_y.to_i
-
-      stage.status_label.text = "Mouse { X:#{@bullet.x} Y:#{@bullet.y} }"
-      #@ms_click = true
-    end
   end
 
   def update(time)
-    #debug on click and reset
-    #debugger if @ms_click
-    #@ms_click = false if @ms_click
 
     #Move the cursor crosshair with mouse position
     self.x = input_manager.window.mouse_x.to_i
