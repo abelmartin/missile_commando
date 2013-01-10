@@ -40,32 +40,36 @@ class Bullet < Actor
   end
 
   def update(time)
-    @time_pool ||= 0
 
+    debugger
+    @dir ||= vec2(@target[:x], @target[:y])
+    physical.body.apply_impulse(@dir*time*@speed, ZERO_VEC_2) if physical.body.v.length < 100
+    super time
+    
     #debugger
-    @time_pool += time
+    #@time_pool += time
 
-    if (0..35).include?(@time_pool % @speed)
-      delta_x = (@target[ :x ] - @origin[ :x ]).to_f
-      delta_y = ((-1 * @target[ :y ]) - (-1 * @origin[ :y ])).to_f
-      slope =  delta_x / delta_y
-      #debugger
-      #stage.status_label.text = slope
+    #if (0..35).include?(@time_pool % @speed)
+      #delta_x = (@target[ :x ] - @origin[ :x ]).to_f
+      #delta_y = ((-1 * @target[ :y ]) - (-1 * @origin[ :y ])).to_f
+      #slope =  delta_x / delta_y
+      ##debugger
+      ##stage.status_label.text = slope
 
-      #Once we have the slope, we can figure out movement.
-      #when adding the simple number make sure to keep the pos/neg of the equation.
-      #in a whole number slope (ex:4/1), do the following
-      if slope >= 1
-        numerator = slope.finite? ? slope : 
-        self.x += (slope * 10).to_i
-        self.y += (delta_y >=0) ? -10 : 10
-      else
-        #in a fraction slope (ex:1/4), do the following
-        denominator = 10000 / (slope * 10000)
-        self.x += (delta_x >=0) ? 10 : -10
-        self.y += (delta_y >=0) ? denominator * -10 : denominator * 10
-      end
-    end
+      ##Once we have the slope, we can figure out movement.
+      ##when adding the simple number make sure to keep the pos/neg of the equation.
+      ##in a whole number slope (ex:4/1), do the following
+      #if slope >= 1
+        #numerator = slope.finite? ? slope : 
+        #self.x += (slope * 10).to_i
+        #self.y += (delta_y >=0) ? -10 : 10
+      #else
+        ##in a fraction slope (ex:1/4), do the following
+        #denominator = 10000 / (slope * 10000)
+        #self.x += (delta_x >=0) ? 10 : -10
+        #self.y += (delta_y >=0) ? denominator * -10 : denominator * 10
+      #end
+    #end
 
     #if stage.shield.hit?(self)
       #stage.status_label.text = "collide"
