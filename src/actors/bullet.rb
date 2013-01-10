@@ -16,7 +16,7 @@ class Bullet < Actor
   attr_reader :speed, :power, :color, :bullet_size, :origin, :target
 
   def setup
-    @speed = opts[:speed] || 1000
+    @speed = opts[:speed] || 100
     @power = opts[:power] || 10
     @color = opts[:color] || [255,0,0,255]
     @bullet_size = opts[:bullet_size] || 5
@@ -42,8 +42,8 @@ class Bullet < Actor
     @time_pool += time
 
     if (0..35).include?(@time_pool % @speed)
-      delta_x = (@origin[ :x ] - @target[ :x ]).to_f
-      delta_y = (@origin[ :y ] - @target[ :y ]).to_f
+      delta_x = (@target[ :x ] - @origin[ :x ]).to_f
+      delta_y = ((-1 * @target[ :y ]) - (-1 * @origin[ :y ])).to_f
       slope =  delta_x / delta_y
       #debugger
       #stage.status_label.text = slope
@@ -53,11 +53,12 @@ class Bullet < Actor
       #in a whole number slope (ex:4/1), do the following
       if slope >= 1
         self.x += (slope * 10).to_i
-        self.y += (slope >=0) ? 10 : -10
+        self.y += (delta_y >=0) ? -10 : 10
       else
         #in a fraction slope (ex:1/4), do the following
-        self.x += (slope >=0) ? 1 : -1
-        self.y += (slope * 10).to_i
+        denominator = 10000 / (slope * 10000)
+        self.x += (delta_x >=0) ? 10 : -10
+        self.y += (delta_y >=0) ? denominator * -10 : denominator * 10
       end
     end
 

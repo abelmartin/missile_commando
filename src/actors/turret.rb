@@ -48,10 +48,10 @@ class Turret < Actor
 
   def shoot
     #@ms_click = true
-    if @shots.length <= 3
+    if @shots.length <= 5000
       origin = {
         x: x + 60,
-        y: y + 60,
+        y: y - 60,
       }
 
       target = {
