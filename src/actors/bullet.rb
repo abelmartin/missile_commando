@@ -11,7 +11,11 @@ class BulletView < ActorView
 end
 
 class Bullet < Actor
-  has_behaviors :updatable
+  has_behaviors :updatable, physical: {
+    shape: :circle,
+    mass: 10,
+    radius: 5
+  }
 
   attr_reader :speed, :power, :color, :bullet_size, :origin, :target
 
@@ -52,6 +56,7 @@ class Bullet < Actor
       #when adding the simple number make sure to keep the pos/neg of the equation.
       #in a whole number slope (ex:4/1), do the following
       if slope >= 1
+        numerator = slope.finite? ? slope : 
         self.x += (slope * 10).to_i
         self.y += (delta_y >=0) ? -10 : 10
       else
