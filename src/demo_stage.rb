@@ -1,4 +1,4 @@
-class DemoStage < Stage
+class DemoStage < PhysicalStage
   attr_reader :score, :shield, :status_label, :bases, :aliens
 
   def setup
