@@ -47,7 +47,8 @@ class Alien < Actor
             color: @color,
             origin: origin,
             target: target,
-            speed: 5
+            speed: 5,
+            shooter: self
     )
     stage.sound_manager.play_sound :laser
   end

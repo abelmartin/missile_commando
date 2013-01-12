@@ -66,7 +66,11 @@ class Turret < Actor
         y: input_manager.window.mouse_y.to_i,
       }
 
-      bullet = spawn :bullet, color: @color, origin: origin, target: target
+      bullet = spawn :bullet,
+                      color: @color,
+                      origin: origin,
+                      target: target,
+                      shooter: self
 
       @shots.push bullet
     end
