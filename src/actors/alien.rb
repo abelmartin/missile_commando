@@ -43,23 +43,29 @@ class Alien < Actor
     }
 
     @shots.push(
-      spawn :bullet, color: @color, origin: origin, target: target
+      spawn :bullet,
+            color: @color,
+            origin: origin,
+            target: target,
+            speed: 5
     )
     stage.sound_manager.play_sound :laser
   end
 
-  def hit?(bullet)
-    bullet.x^2 + bullet.y^2 < radius^2
-  end
+  #def hit?(bullet)
+    #bullet.x^2 + bullet.y^2 < radius^2
+  #end
 
   def update(time)
     @time_pool ||= 0
 
     update_color
     movement
+    @shots.delete_if{ |shot| !shot.alive? }
 
-    #@time_pool += time
-    #shoot if (10...25).include?(@time_pool % 2000)
+    @time_pool += time
+    shoot if (10...25).include?(@time_pool % 2000)
+
   end
 
   private

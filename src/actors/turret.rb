@@ -42,13 +42,20 @@ class Turret < Actor
     #debug on click and reset
     #debugger if @ms_click
     #@ms_click = false if @ms_click
+
+    #shot_count = @shots.length
+
+    @shots.delete_if{ |shot| !shot.alive? }
+
+    #debugger if @shots.length != shot_count
+    #dummy = 1
   end
 
   private
 
   def shoot
     #@ms_click = true
-    if @shots.length <= 5000
+    if @shots.length <= 5
       origin = {
         x: x + 60,
         y: y - 60,
@@ -62,10 +69,6 @@ class Turret < Actor
       bullet = spawn :bullet, color: @color, origin: origin, target: target
 
       @shots.push bullet
-
-      stage.status_label.text = "Target { X:#{bullet.x} Y:#{bullet.y} }"
-    else
-      stage.status_label.text = "Too many shots! #{@shots.length}"
     end
   end
 end
