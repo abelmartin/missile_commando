@@ -16,10 +16,10 @@ Rules
 
 Evil aliens in their perfect little circle ships attack from outer
 space.  
-As the Missle Commando, you must shoot those bastards out of the
-sky!
+As the Missle Commando, you must **SHOOT THOSE BASTARDS OUT OF THE
+SKY!**
 
-If you can destroy an alien's ship, their bullets will be destroyed too.
+WHEN you can destroy an alien's ship, their bullets will be destroyed too.
 
 **LEFT CLICK** to fire your mighty missles.  You have 6 of them loaded at a
 time.  If you're a sharp shooter, you can even deflect an alien's shot!
