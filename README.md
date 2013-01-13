@@ -3,22 +3,35 @@ missile_commando
 
 Missile Comando is a [NYCRR](http://www.meetup.com/nycruby/) project using Gamebox
 
-Resources
+Installation
 ================
 
-Images were taken from some of the following Lost Garden projects:
+1. Clone the repo locally or grab the zip
+2. CD to the directory and run Bundle Install
+3. Run 'ruby src/app.rb'
+4. Enjoy
 
-* http://www.lostgarden.com/2007/04/free-game-graphics-tyrian-ships-and.html
-* http://www.lostgarden.com/2005/03/game-post-mortem-hard-vacuum.html
-* http://www.lostgarden.com/2006/02/250-free-handdrawn-textures.html
+Rules
+================
 
-...and IronStar projects:
+Evil aliens in their perfect little circle ships attack from outer
+space.  As the Missle Commando, you must shoot those bastards out of the
+sky!
 
-* http://www.ironstarmedia.co.uk/2009/12/free-game-assets-04-user-interface-sprites/
+If you can destroy an alien's ship, their bullets will be destroyed too.
 
-... along with textures from this Flickr project:
+LEFT CLICK to fire your mighty missles.  You have 6 of them loaded at a
+time.  If you're a sharp shooter, you can even deflect an alien's shot!
 
-* http://www.flickr.com/photos/zooboing/sets/72157622892051396/
+RIGHT CLICK to reload your turret.  It takes about 5 seconds to reload
+each shell consider yourself warned!
+
+After each alien wave, your shields will be replenished.  Keep in mind,
+the alien will come at you with strong & faster ships each wave...but
+you're the best hope our galaxy has against them.
+
+Resources
+================
 
 Audio was taken from the example projects in the gamebox project and also created using Bfxr ([website](http://www.bfxr.net/), [website repo](https://github.com/increpare/bfxr), [adobe air repo](https://github.com/increpare/bfxr-air)).
 
