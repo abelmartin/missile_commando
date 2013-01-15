@@ -29,7 +29,7 @@ class Alien < Actor
 
     #If an alien loses its health, remove it AND it's bullets
     if @health <= 0
-      self.shots.each{|shot| shot.remove_self}
+      @shots.each{|shot| shot.remove_self}
       self.remove_self
     end
 
