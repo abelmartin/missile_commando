@@ -32,7 +32,7 @@ class Turret < Actor
     @color = [255, 153, 0, 255]
     self.y = screen.height - 80
 
-    @ms_click = false
+    #@ms_click = false
     stage.input_manager.reg :down, MsLeft do
       shoot
     end

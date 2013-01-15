@@ -30,9 +30,4 @@ class Shield < Actor
     self.x = @dimensions[:x1]
     self.y = @dimensions[:y1]
   end
-
-  def hit?(bullet)
-    bullet.lowest_point > dimensions[:y1] + 5
-  end
-
 end

@@ -1,8 +1,7 @@
 class DemoStage < PhysicalStage
-  attr_reader :score,
+  attr_reader :bases,
+              :score,
               :shield,
-              :status_label,
-              :bases,
               :aliens,
               :turret, 
               :wave_report

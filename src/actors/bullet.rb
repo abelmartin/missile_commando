@@ -17,13 +17,20 @@ class Bullet < Actor
     radius: 5
   }
 
-  attr_reader :speed, :power, :color, :bullet_size, :origin, :target
+  attr_reader :speed,
+              :power,
+              :color,
+              :bullet_size,
+              :origin,
+              :target,
+              :shooter
 
   def setup
     @speed = opts[:speed] || 20
     @power = opts[:power] || 10
     @color = opts[:color] || [255,0,0,255]
     @bullet_size = opts[:bullet_size] || 5
+    @shooter = opts[:shooter]
 
     #If you don't give a origin or target,
     #the bullet will just race across the top of the screen
@@ -43,20 +50,26 @@ class Bullet < Actor
   end
 
   def update(time)
-
     @dir ||= vec2(@target[:x] - @origin[:x], @target[:y] - @origin[:y])
     physical.body.apply_impulse(@dir*@speed, ZERO_VEC_2) if physical.body.v.length < 100
     super time
 
-    #if reached_target?(self)
-      #stage.status_label.text = "collide"
-    #end
+    self.remove_self if !still_on_screen? || hit?
+  end
 
-    self.remove_self unless still_on_screen?
+  def hit?
+    hit = false
+
+    if shooter.class == Turret
+      stage.aliens.each do |alien|
+        hit = true if ((x-alien.x)^2 + (y-alien.y)^2 < alien.radius^2)
+      end
+    elsif shooter.class == Alien
+      hit = lowest_point > (stage.shield.y + bullet_size)
+    end
   end
 
   def still_on_screen?
     (0...screen.width).include?(x) && (0...screen.height).include?(y)
   end
-
 end

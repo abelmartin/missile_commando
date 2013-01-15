@@ -53,10 +53,6 @@ class Alien < Actor
     ) unless @shots.length >= 2
   end
 
-  #def hit?(bullet)
-    #bullet.x^2 + bullet.y^2 < radius^2
-  #end
-
   def update(time)
     @time_pool ||= 0
 
