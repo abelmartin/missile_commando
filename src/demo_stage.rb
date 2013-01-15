@@ -1,5 +1,11 @@
 class DemoStage < PhysicalStage
-  attr_reader :score, :shield, :status_label, :bases, :aliens
+  attr_reader :score,
+              :shield,
+              :status_label,
+              :bases,
+              :aliens,
+              :turret, 
+              :wave_report
 
   def setup
     super
@@ -9,7 +15,6 @@ class DemoStage < PhysicalStage
     @score = spawn :score, x: 10, y: 10
     @cursor = spawn :cursor, z: 10
     @shield = spawn :shield, z: 1
-    @status_label = spawn :status_label, x: (width - 100), y: 0, text: "Debug Info"
 
     screen_segment = width / DENOMINATOR
     base_height = height - 80
@@ -20,6 +25,7 @@ class DemoStage < PhysicalStage
     bases[ 3 ] = spawn :base, x: screen_segment*8
 
     @turret = spawn :turret, x: screen_segment*4, y: base_height
+    @wave_report = spawn :wave_report, y:100
   end
 
   def draw(target)
@@ -44,7 +50,9 @@ class DemoStage < PhysicalStage
       #aliens.push( spawn :alien,  x: width / 2, y: 50 )
     #end
 
-    aliens.push( spawn :alien,  x: width / 2, y: 50 ) if aliens.empty?
+    if aliens.empty? && !@wave_report.visible?
+      aliens.push( spawn :alien,  x: width / 2, y: 50 ) 
+    end
   end
 end
 

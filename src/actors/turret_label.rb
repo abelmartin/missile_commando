@@ -1,4 +1,4 @@
-class StatusLabelView < ActorView
+class TurretLabelView < ActorView
   def draw(target, x_off, y_off, z)
     actor.font.draw(
       "#{actor.text}",
@@ -12,7 +12,7 @@ class StatusLabelView < ActorView
   end
 end
 
-class StatusLabel < Actor
+class TurretLabel < Actor
   attr_reader :strength
   attr_accessor :text, :font, :color
 

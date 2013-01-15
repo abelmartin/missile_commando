@@ -23,7 +23,7 @@ end
 
 class Turret < Actor
   has_behaviors :updatable
-  attr_reader :default_width, :default_height, :color
+  attr_reader :default_width, :default_height, :color, :shots_available
 
   def setup
     @shots = []
@@ -36,6 +36,8 @@ class Turret < Actor
     stage.input_manager.reg :down, MsLeft do
       shoot
     end
+
+    @turret_label = spawn :turret_label, x: (screen.width - 100), y: 0, text: "Shots Left: 6"
   end
 
   def update(time)

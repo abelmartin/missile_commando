@@ -42,15 +42,15 @@ class Alien < Actor
       y: stage.shield.y + 5,
     }
 
+    #Only allow aliens to fire 2 bullets at any given time.
     @shots.push(
       spawn :bullet,
             color: @color,
             origin: origin,
             target: target,
-            speed: 5,
+            speed: 3,
             shooter: self
-    )
-    stage.sound_manager.play_sound :laser
+    ) unless @shots.length >= 2
   end
 
   #def hit?(bullet)

@@ -33,6 +33,9 @@ class Bullet < Actor
     #Set the starting point against the origin
     self.x = @origin[ :x ]
     self.y = @origin[ :y ]
+
+    # A little "pew pew" for ya
+    stage.sound_manager.play_sound :laser
   end
 
   def lowest_point
