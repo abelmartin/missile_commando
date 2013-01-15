@@ -62,10 +62,12 @@ class Bullet < Actor
 
     if shooter.class == Turret
       stage.aliens.each do |alien|
-        hit = true if ((x-alien.x)^2 + (y-alien.y)^2 < alien.radius^2)
+        hit = true if ((x-alien.x)**2 + (y-alien.y)**2 < alien.radius^2)
+        alien.recieved_hit(@power) if hit
       end
     elsif shooter.class == Alien
       hit = lowest_point > (stage.shield.y + bullet_size)
+      stage.shield.recieved_hit(@power) if hit
     end
 
     hit

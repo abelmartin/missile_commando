@@ -53,13 +53,6 @@ class Turret < Actor
     #dummy = 1
   end
 
-  def recieved_hit(strength)
-    # The turret isn't actually hit, but it's the shooter.
-    # As the shooter, it recieves the callback when hit.
-    # It has to decrement the shield
-    stage.shield - strength
-  end
-
   private
 
   def shoot
