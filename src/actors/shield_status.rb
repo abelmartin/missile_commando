@@ -5,9 +5,7 @@ class ShieldStatusView < ActorView
       "Shield #{actor.strength}%",
       (target.screen.width/2) - 120,
       target.screen.height - 175,
-      z,
-      1,
-      1,
+      z, 1, 1,
       target.convert_color(actor.color)
     )
   end

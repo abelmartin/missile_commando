@@ -67,6 +67,8 @@ class Bullet < Actor
     elsif shooter.class == Alien
       hit = lowest_point > (stage.shield.y + bullet_size)
     end
+
+    hit
   end
 
   def still_on_screen?

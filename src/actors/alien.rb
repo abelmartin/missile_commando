@@ -1,7 +1,6 @@
 class AlienView < ActorView
   def draw(target, x_off, y_off, z)
     target.draw_circle_filled(
-    #target.draw_circle(
       actor.x,
       actor.y,
       actor.radius,
@@ -21,13 +20,32 @@ class Alien < Actor
     @shots = []
     @color = [0, 255, 0, 255]
     @catalyst = 1
+    @health = opts[:health] || 1
     @radius = 40
-    reset_health
   end
 
-  def reset_health
-    @health = 100
+  def update(time)
+    @time_pool ||= 0
+
+    #If an alien loses its health, remove it AND it's bullets
+    if @health <= 0
+      self.shots.each{|shot| shot.remove_self}
+      self.remove_self
+    end
+
+    update_color
+    movement
+    @shots.delete_if{ |shot| !shot.alive? }
+
+    @time_pool += time
+    shoot if (10...25).include?(@time_pool % 2000)
   end
+
+  def recieved_hit(strength)
+    @health -= strength
+  end
+
+  private
 
   def shoot
     # bullet's are fired from actor's xy
@@ -52,20 +70,6 @@ class Alien < Actor
             shooter: self
     ) unless @shots.length >= 2
   end
-
-  def update(time)
-    @time_pool ||= 0
-
-    update_color
-    movement
-    @shots.delete_if{ |shot| !shot.alive? }
-
-    @time_pool += time
-    shoot if (10...25).include?(@time_pool % 2000)
-
-  end
-
-  private
 
   def movement
     rate = 10
