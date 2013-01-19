@@ -11,13 +11,14 @@ class AlienView < ActorView
 end
 
 class Alien < Actor
-  attr_reader :health, :color, :radius
+  attr_reader :health, :color, :radius, :speed
 
   has_behaviors :updatable
   #has_behaviors :actor_hit
 
   def setup
     @shots = []
+    @speed ||= 5
     @color = [0, 255, 0, 255]
     @catalyst = 1
     @health = opts[:health] || 1
@@ -72,16 +73,15 @@ class Alien < Actor
   end
 
   def movement
-    rate = 10
-    @update_value ||= rate
+    @update_value ||= speed
 
     case x
     when (screen.width - radius)..screen.width
-      @update_value = -1*rate
-      self.y += rate
+      @update_value = -1*speed
+      self.y += speed
     when 0..radius
-      @update_value = rate
-      self.y += rate
+      @update_value = speed
+      self.y += speed
     end
 
     self.x += @update_value
