@@ -62,7 +62,13 @@ class Bullet < Actor
 
     if shooter.class == Turret
       stage.aliens.each do |alien|
-        hit = true if ((x-alien.x)**2 + (y-alien.y)**2 < alien.radius^2)
+        #hit = true if ((x-alien.x)**2 + (y-alien.y)**2 < alien.radius^2)
+        #In an ideal world, the formula above would work.  It's how you find
+        #a point in a circle.  Instead I'm wrapping the alien in a box and
+        #detecting hits on that box
+        hit_x = ((alien.x - alien.radius)..(alien.x + alien.radius)).include? x
+        hit_y = ((alien.y - alien.radius)..(alien.y + alien.radius)).include? y
+        hit = hit_x && hit_y
         alien.recieved_hit(@power) if hit
       end
     elsif shooter.class == Alien
