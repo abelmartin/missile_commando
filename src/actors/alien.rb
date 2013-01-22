@@ -32,6 +32,7 @@ class Alien < Actor
     if @health <= 0
       @shots.each{|shot| shot.remove_self}
       self.remove_self
+      stage.wave_report.alien_killed
     end
 
     update_color

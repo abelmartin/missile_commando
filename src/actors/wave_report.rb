@@ -35,12 +35,27 @@ class WaveReport < Actor
     @text = "Wave 1"
     @stats = {
       aliensKiled: nil,
-      shotsDeflected: nil,
+      #shotsDeflected: nil,
       shotsFired: nil,
       shotsHit: nil,
     }
     @color = [255,255,255,255]
     @font = @stage.resource_manager.load_font 'Abel-Regular.ttf', 50
+  end
+
+  def shot_fired
+    @stats[:shotsFired] ||= 0
+    @stats[:shotsFired] += 1
+  end
+
+  def shot_hit
+    @stats[:shotsHit] ||= 0
+    @stats[:shotsHit] += 1
+  end
+
+  def alien_killed
+    @stats[:aliensKilled] ||= 0
+    @stats[:aliensKilled] += 1
   end
 
   def width
