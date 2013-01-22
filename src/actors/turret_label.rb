@@ -22,9 +22,9 @@ class TurretLabel < Actor
     @color = [255,255,255,255]
     @font = @stage.resource_manager.load_font 'Abel-Regular.ttf', 50
 
-    input_manager.reg :down, KbSpace do
-      @text = "SPACE BAR HIT"
-    end
+    #input_manager.reg :down, KbSpace do
+      #@text = "SPACE BAR HIT"
+    #end
   end
 
   def reset_strength

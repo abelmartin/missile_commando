@@ -21,13 +21,12 @@ SKY!**
 
 WHEN you can destroy an alien's ship, their bullets will be destroyed too.
 
-**LEFT CLICK** to fire your mighty missles.  You have 6 of them loaded at a
+**LEFT CLICK** to fire your mighty missles.  You have 2 of them loaded at a
 time.  If you're a sharp shooter, you can even deflect an alien's shot!
+You'll automatically reload your turret so don't sweat it.
 
-**RIGHT CLICK** to reload your turret.  It takes about 5 seconds to reload
-each shell consider yourself warned!
 
-After each alien wave, your shields will be replenished.  Keep in mind,
+After each alien wave, your shield will be replenished.  Keep in mind,
 the alien forces will come at you with strong & faster ships each wave...but
 you're the best hope our galaxy has against them.  Teach them some
 respect!

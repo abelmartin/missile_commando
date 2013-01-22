@@ -27,12 +27,13 @@ end
 
 class WaveReport < Actor
   attr_accessor :color
-  attr_reader :title, :font, :text, :stats
+  attr_reader :title, :font, :text, :stats, :current_wave
 
   has_behaviors :updatable
 
   def setup
-    @text = "Wave 1"
+    @current_wave = 1
+    @text = "Wave #{@current_wave}"
     reset_stats
     @color = [255,255,255,255]
     @font = @stage.resource_manager.load_font 'Abel-Regular.ttf', 50

@@ -42,15 +42,18 @@ class DemoStage < PhysicalStage
   def update(time)
     super time
 
-    #@time_pool ||= 0
-    #@time_pool += time
+    @time_pool ||= 0
+    @time_pool += time
 
-    #if (10..35).include?(@time_pool % 10000)
-      #aliens.push( spawn :alien,  x: width / 2, y: 50 )
-    #end
+    if !@wave_report.visible?
+      start_point = Random.rand(width)
+      if (aliens.length <= wave_report.current_wave) && (10..35).include?(@time_pool % 10000)
+        aliens.push( spawn :alien,  x: start_point, y: 50 )
+      end
 
-    if aliens.empty? && !@wave_report.visible?
-      aliens.push( spawn :alien,  x: width / 2, y: 50 ) 
+      if aliens.empty?
+        aliens.push( spawn :alien,  x: start_point, y: 50 ) 
+      end
     end
   end
 end

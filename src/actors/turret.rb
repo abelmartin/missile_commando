@@ -23,41 +23,39 @@ end
 
 class Turret < Actor
   has_behaviors :updatable
-  attr_reader :default_width, :default_height, :color, :shots_available
+  attr_reader :default_width, :default_height, :color
 
   def setup
     @shots = []
+    @clip_size = 2
     @default_width = (screen.width/DENOMINATOR)
     @default_height = 50
     @color = [255, 153, 0, 255]
     self.y = screen.height - 80
 
-    #@ms_click = false
     stage.input_manager.reg :down, MsLeft do
       shoot
     end
 
-    @turret_label = spawn :turret_label, x: (screen.width - 100), y: 0, text: "Shots Left: 6"
+    @turret_label = spawn :turret_label,
+                          x: (screen.width - 100),
+                          y: 0,
+                          text: "Shots Left: #{shots_available}"
+  end
+
+  def shots_available
+    @clip_size - @shots.length
   end
 
   def update(time)
-    #debug on click and reset
-    #debugger if @ms_click
-    #@ms_click = false if @ms_click
-
-    #shot_count = @shots.length
-
     @shots.delete_if{ |shot| !shot.alive? }
-
-    #debugger if @shots.length != shot_count
-    #dummy = 1
+    @turret_label.text = "Shots Left: #{shots_available}"
   end
 
   private
 
   def shoot
-    #@ms_click = true
-    if @shots.length <= 3
+    if @shots.length < 2
       #Slightly magic numbers.
       #Fires the bullets from the end of the turret.
       origin = {
