@@ -42,7 +42,16 @@ class WaveManager < Actor
     @text = "Wave #{@current_wave}"
     reset_stats
     @color = [255,255,255,255]
-    @font = @stage.resource_manager.load_font 'Abel-Regular.ttf', 50
+    @font = stage.resource_manager.load_font 'Abel-Regular.ttf', 50
+
+    @alien_label = spawn :alien_label,
+                          x: (screen.width - 100),
+                          y: 0,
+                          text: "Aliens Left: 0"
+  end
+
+  def alien_limit
+    @current_wave + 1
   end
 
   def shot_fired
@@ -100,6 +109,7 @@ class WaveManager < Actor
   end
 
   def alien_wave
+    # Releasing the hounds
     if !visible?
       start_point = Random.rand(screen.width)
       if (@aliens.length <= @current_wave) && (10..35).include?(@time_pool % 10000)
@@ -110,6 +120,9 @@ class WaveManager < Actor
         @aliens.push( spawn :alien,  x: start_point, y: 50 ) 
       end
     end
+
+    # Updating the label
+    @alien_label.text = "Aliens Left: #{alien_limit - aliens.select{|alien| !alien.alive?}.length}"
   end
 
   def fade_text

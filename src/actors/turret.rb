@@ -36,11 +36,6 @@ class Turret < Actor
     stage.input_manager.reg :down, MsLeft do
       shoot
     end
-
-    @turret_label = spawn :turret_label,
-                          x: (screen.width - 100),
-                          y: 0,
-                          text: "Shots Left: #{shots_available}"
   end
 
   def shots_available
@@ -49,7 +44,6 @@ class Turret < Actor
 
   def update(time)
     @shots.delete_if{ |shot| !shot.alive? }
-    @turret_label.text = "Shots Left: #{shots_available}"
   end
 
   private
