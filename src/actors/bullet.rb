@@ -45,7 +45,7 @@ class Bullet < Actor
     stage.sound_manager.play_sound :laser
 
     #Register the shot if it's from a turret
-    stage.wave_report.shot_fired if @shooter.class == Turret
+    stage.wave_manager.shot_fired if @shooter.class == Turret
   end
 
   def lowest_point
@@ -64,7 +64,7 @@ class Bullet < Actor
     hit = false
 
     if shooter.class == Turret
-      stage.aliens.each do |alien|
+      stage.wave_manager.aliens.each do |alien|
         #hit = true if ((x-alien.x)**2 + (y-alien.y)**2 < alien.radius^2)
         #In an ideal world, the formula above would work.  It's how you find
         #a point in a circle.  Instead I'm wrapping the alien in a box and
@@ -76,7 +76,7 @@ class Bullet < Actor
 
         if hit
           alien.recieved_hit(@power)
-          stage.wave_report.shot_hit
+          stage.wave_manager.shot_hit
         end
       end
     elsif shooter.class == Alien

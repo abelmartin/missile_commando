@@ -1,4 +1,4 @@
-class WaveReportView < ActorView
+class WaveManagerView < ActorView
   def draw(target, x_off, y_off, z)
     #This info should be above everything else.
     z += 100
@@ -25,13 +25,19 @@ class WaveReportView < ActorView
   end
 end
 
-class WaveReport < Actor
+class WaveManager < Actor
   attr_accessor :color
-  attr_reader :title, :font, :text, :stats, :current_wave
+  attr_reader :title,
+              :font,
+              :text,
+              :stats,
+              :current_wave,
+              :aliens
 
   has_behaviors :updatable
 
   def setup
+    @aliens = []
     @current_wave = 1
     @text = "Wave #{@current_wave}"
     reset_stats
@@ -76,9 +82,37 @@ class WaveReport < Actor
     resource_manager.load_font @font, @size
   end
 
+  def end_wave
+    self.show
+  end
+
+  def next_wave
+    @current_wave += 1
+    reset_stats
+    stage.reset_aliens
+  end
+
   def update(time)
     @time_pool ||= 0
     @time_pool += time
+    fade_text
+    alien_wave
+  end
+
+  def alien_wave
+    if !visible?
+      start_point = Random.rand(screen.width)
+      if (@aliens.length <= @current_wave) && (10..35).include?(@time_pool % 10000)
+        @aliens.push( spawn :alien,  x: start_point, y: 50 )
+      end
+
+      if @aliens.empty?
+        @aliens.push( spawn :alien,  x: start_point, y: 50 ) 
+      end
+    end
+  end
+
+  def fade_text
     if (10...50).include?(@time_pool % 100)
       #fade to black
       @color[0] -= 5
@@ -87,8 +121,9 @@ class WaveReport < Actor
     end
 
     if @color[0] <= 0
-      self.hide
+      hide
       @color = [255,255,255]
+      next_wave if @aliens.all?{|alien| !alien.visible?} && (@aliens.count == @current_wave + 1)
     end
   end
 end
