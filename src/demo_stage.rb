@@ -2,7 +2,7 @@ class DemoStage < PhysicalStage
   attr_reader :bases,
               :score,
               :shield,
-              :turret, 
+              :turret,
               :wave_manager
 
   def setup

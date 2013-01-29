@@ -49,7 +49,11 @@ class Turret < Actor
   private
 
   def shoot
-    if @shots.length < 2
+    #Don't allow shots that target below the shield line
+    mouse_y = input_manager.window.mouse_y.to_i
+    stage_y = stage.shield.dimensions[:y1]
+
+    if (mouse_y < stage_y) && @shots.length < 2
       #Slightly magic numbers.
       #Fires the bullets from the end of the turret.
       origin = {
