@@ -36,7 +36,6 @@ class Cursor < Actor
   end
 
   def update(time)
-
     #Move the cursor crosshair with mouse position
     self.x = input_manager.window.mouse_x.to_i
     self.y = input_manager.window.mouse_y.to_i

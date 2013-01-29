@@ -26,6 +26,8 @@ class WaveManagerView < ActorView
 end
 
 class WaveManager < Actor
+  include DelayedActions
+
   attr_accessor :color
   attr_reader :title,
               :font,
@@ -52,6 +54,10 @@ class WaveManager < Actor
 
   def alien_limit
     @current_wave + 1
+  end
+
+  def aliens_left
+    alien_limit - aliens.select{|alien| !alien.alive?}.length
   end
 
   def shot_fired
@@ -106,32 +112,35 @@ class WaveManager < Actor
     @time_pool += time
     fade_text
     alien_wave
+
+    show if aliens_left == 0
   end
 
   def alien_wave
     # Releasing the hounds
     if !visible?
       start_point = Random.rand(screen.width)
-      if (@aliens.length <= @current_wave) && (10..35).include?(@time_pool % 10000)
+
+      delayed_action('alien' ,10) do
         @aliens.push( spawn :alien,  x: start_point, y: 50 )
-      end
+      end if (@aliens.length <= @current_wave)
 
       if @aliens.empty?
-        @aliens.push( spawn :alien,  x: start_point, y: 50 ) 
+        @aliens.push( spawn :alien,  x: start_point, y: 50 )
       end
     end
 
     # Updating the label
-    @alien_label.text = "Aliens Left: #{alien_limit - aliens.select{|alien| !alien.alive?}.length}"
+    @alien_label.text = "Aliens Left: #{aliens_left}"
   end
 
   def fade_text
-    if (10...50).include?(@time_pool % 100)
+    delayed_action('text_fade' ,0.025) do
       #fade to black
       @color[0] -= 5
       @color[1] -= 5
       @color[2] -= 5
-    end
+    end if visible?
 
     if @color[0] <= 0
       hide

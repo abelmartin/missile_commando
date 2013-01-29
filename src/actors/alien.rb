@@ -11,6 +11,7 @@ class AlienView < ActorView
 end
 
 class Alien < Actor
+  include DelayedActions
   attr_reader :health, :color, :radius, :speed
 
   has_behaviors :updatable
@@ -18,7 +19,7 @@ class Alien < Actor
 
   def setup
     @shots = []
-    @speed ||= 5 
+    @speed ||= 5
     @color = [0, 255, 0, 255]
     @catalyst = 1
     @health = opts[:health] || 1
@@ -26,7 +27,6 @@ class Alien < Actor
   end
 
   def update(time)
-    @time_pool ||= 0
 
     #If an alien loses its health, remove it AND it's bullets
     if @health <= 0
@@ -39,8 +39,7 @@ class Alien < Actor
     movement
     @shots.delete_if{ |shot| !shot.alive? }
 
-    @time_pool += time
-    shoot if (10...25).include?(@time_pool % 2000)
+    delayed_action('alien' ,2.5){ shoot }
   end
 
   def recieved_hit(strength)
