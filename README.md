@@ -34,6 +34,8 @@ respect!
 Resources
 ================
 
+This game uses [Gamebox v0.3.3](https://github.com/shawn42/gamebox/tree/v0.3.3) so thanks to [@shawn42](https://github.com/shawn42) for that. :)
+
 Audio was ... 
 * taken from the example projects in the gamebox project 
 * created using Bfxr ([website](http://www.bfxr.net/), [website repo](https://github.com/increpare/bfxr), [adobe air repo](https://github.com/increpare/bfxr-air)).
