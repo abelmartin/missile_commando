@@ -41,8 +41,7 @@ class WaveManager < Actor
   def setup
     @aliens = []
     @current_wave = 1
-    @text = "Wave #{@current_wave}"
-    reset_stats
+    reset_stats_and_info
     @color = [255,255,255,255]
     @font = stage.resource_manager.load_font 'Abel-Regular.ttf', 50
 
@@ -75,7 +74,8 @@ class WaveManager < Actor
     @stats[:aliensKilled] += 1
   end
 
-  def reset_stats
+  def reset_stats_and_info
+    @text = "Wave #{@current_wave}"
     @stats = {
       aliensKiled: nil,
       #shotsDeflected: nil,
@@ -97,20 +97,17 @@ class WaveManager < Actor
     resource_manager.load_font @font, @size
   end
 
-  def end_wave
-    self.show
-  end
-
   def next_wave
     @current_wave += 1
-    reset_stats
-    stage.reset_aliens
+    @aliens = []
+    reset_stats_and_info
+    show
   end
 
   def update(time)
     @time_pool ||= 0
     @time_pool += time
-    fade_text
+    wave_info
     alien_wave
 
     show if aliens_left == 0
@@ -134,7 +131,7 @@ class WaveManager < Actor
     @alien_label.text = "Aliens Left: #{aliens_left}"
   end
 
-  def fade_text
+  def wave_info
     delayed_action('text_fade' ,0.025) do
       #fade to black
       @color[0] -= 5
@@ -145,7 +142,10 @@ class WaveManager < Actor
     if @color[0] <= 0
       hide
       @color = [255,255,255]
-      next_wave if @aliens.all?{|alien| !alien.visible?} && (@aliens.count == @current_wave + 1)
+
+      if aliens_left == 0
+        next_wave
+      end
     end
   end
 end
