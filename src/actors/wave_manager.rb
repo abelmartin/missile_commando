@@ -119,7 +119,7 @@ class WaveManager < Actor
       start_point = Random.rand(screen.width)
 
       delayed_action('alien' ,10) do
-        @aliens.push( spawn :alien,  x: start_point, y: 50 )
+        @aliens.push( spawn :alien,  x: start_point, y: 50, speed: @current_wave )
       end if (@aliens.length <= @current_wave)
 
       if @aliens.empty?

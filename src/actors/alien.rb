@@ -19,7 +19,7 @@ class Alien < Actor
 
   def setup
     @shots = []
-    @speed = 10 * (opts[:speed] || 1)
+    @speed = 5 * (opts[:speed] || 1)
     @color = [0, 255, 0, 255]
     @catalyst = 1
     @health = opts[:health] || 1
