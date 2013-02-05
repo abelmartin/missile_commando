@@ -1,7 +1,7 @@
 missile_commando
 ================
 
-Missile Comando is a [NYCRR](http://www.meetup.com/nycruby/) project using [Gamebox](https://github.com/shawn42/gamebox/tree/v0.3.3)
+Missile Comando is my [NYCRR](http://www.meetup.com/nycruby/) project using [Gamebox](https://github.com/shawn42/gamebox/tree/v0.3.3)
 
 Too Long, Didn't Install
 ================
