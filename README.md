@@ -12,7 +12,8 @@ Installation
 ================
 
 1. Clone the repo locally or grab the zip
-2. CD to the directory and run Bundle Install
+2. CD to the directory 
+3. Run 'bundle install'
 3. Run 'ruby src/app.rb'
 4. Enjoy
 
